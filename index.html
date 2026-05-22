@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SYSTEM HUB</title>
-    <!-- Links to the manifest that makes it act native -->
     <link rel="manifest" href="manifest.json">
     <style>
         body {
@@ -58,35 +57,15 @@
 <body>
     <div class="header">SYS // TERMINAL_HUB</div>
     
-    <!-- Using target="_blank" ensures the links open properly -->
-  <a href="#" onclick="launchWithoutHistory('intent://x.com/#Intent;scheme=https;package=com.twitter.android;S.browser_fallback_url=https%3A%2F%2Fx.com;end;'); return false;" class="launch-btn">Initialize X</a>
-
-<a href="#" onclick="launchWithoutHistory('intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;S.browser_fallback_url=https%3A%2F%2Fwww.youtube.com;end;'); return false;" class="launch-btn youtube-btn">Initialize YouTube</a>
+    <!-- Stripped Intent Links: No javascript, no fallbacks -->
+    <a href="intent://x.com/#Intent;scheme=https;package=com.twitter.android;end;" class="launch-btn">Initialize X</a>
+    <a href="intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;end;" class="launch-btn youtube-btn">Initialize YouTube</a>
 
     <script>
-    // 1. This keeps your hub acting like a native installed app
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js');
-    }
-
-    // 2. This launches the external apps without storing history
-    function launchWithoutHistory(intentUrl) {
-        // Create an invisible iframe
-        var iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        
-        // Tell the iframe to launch the Android intent
-        iframe.src = intentUrl;
-        
-        // Add it to the page (this triggers the app launch)
-        document.body.appendChild(iframe);
-        
-        // Clean up and delete the iframe half a second later
-        setTimeout(function() {
-            document.body.removeChild(iframe);
-        }, 500);
-    }
-</script>
-	
+        // Keep ONLY the Service Worker so it installs as an app
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
 </body>
 </html>
