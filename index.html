@@ -57,12 +57,11 @@
 <body>
     <div class="header">SYS // TERMINAL_HUB</div>
     
-    <!-- Stripped Intent Links: No javascript, no fallbacks -->
-   <a href="#" onclick="window.location.replace('twitter://timeline'); return false;" class="launch-btn">Initialize X</a>
+    <!-- Direct App Protocols: No Play Store IDs, no web fallbacks -->
+    <a href="twitter://timeline" class="launch-btn">Initialize X</a>
+    <a href="vnd.youtube://" class="launch-btn youtube-btn">Initialize YouTube</a>
 
-<a href="#" onclick="window.location.replace('vnd.youtube://'); return false;" class="launch-btn youtube-btn">Initialize YouTube</a>
     <script>
-        // Keep ONLY the Service Worker so it installs as an app
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js');
         }
