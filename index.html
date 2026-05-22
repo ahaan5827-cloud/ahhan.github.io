@@ -25,21 +25,18 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-
-    overflow:hidden;
 }
 
-/* PANEL */
+/* HUB */
 .hub{
     width:340px;
-    padding:30px 25px;
+    padding:30px;
 
-    border-radius:20px;
-
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.65);
     backdrop-filter: blur(12px);
 
     border:1px solid rgba(0,255,204,0.2);
+    border-radius:20px;
 
     text-align:center;
 }
@@ -48,9 +45,7 @@ body{
 .title{
     font-size:28px;
     letter-spacing:5px;
-    margin-bottom:8px;
-
-    color:#00ffcc;
+    margin-bottom:10px;
     text-shadow:0 0 10px #00ffcc;
 }
 
@@ -63,7 +58,6 @@ body{
 /* BUTTONS */
 .btn{
     display:block;
-
     padding:16px;
     margin:12px 0;
 
@@ -72,13 +66,10 @@ body{
     text-decoration:none;
     font-size:16px;
     font-weight:bold;
-    letter-spacing:2px;
 
     border:2px solid;
 
     transition:0.2s;
-
-    user-select:none;
 }
 
 /* HOVER */
@@ -89,22 +80,22 @@ body{
 /* X */
 .x{
     background:linear-gradient(135deg,#111,#222);
-    border-color:#ffffff;
-    color:#ffffff;
+    color:#fff;
+    border-color:#fff;
 }
 
 /* YOUTUBE */
 .yt{
     background:linear-gradient(135deg,#3a0000,#7a0000);
-    border-color:#ff4b4b;
     color:#ff4b4b;
+    border-color:#ff4b4b;
 }
 
-/* FOOTER */
-.footer{
-    margin-top:18px;
+/* NOTE */
+.note{
+    margin-top:15px;
     font-size:10px;
-    color:#666;
+    color:#777;
 }
 
 </style>
@@ -115,15 +106,19 @@ body{
 <div class="hub">
 
     <div class="title">SYSTEM HUB</div>
-    <div class="sub">ACCESS TERMINAL</div>
+    <div class="sub">SAFE LAUNCH MODE</div>
 
-    <!-- LINKS -->
-    <a class="btn x" href="https://x.com">INITIALIZE X</a>
+    <!-- IMPORTANT FIX: NO WebView navigation -->
+    <a class="btn x" href="https://x.com" target="_system">
+        OPEN X (SAFE MODE)
+    </a>
 
-    <a class="btn yt" href="https://www.youtube.com">INITIALIZE YOUTUBE</a>
+    <a class="btn yt" href="https://www.youtube.com" target="_system">
+        OPEN YOUTUBE (SAFE MODE)
+    </a>
 
-    <div class="footer">
-        NOTE: Some apps may still open externally due to Android system rules
+    <div class="note">
+        This mode prevents login loops by opening apps in system browser or native apps.
     </div>
 
 </div>
@@ -131,23 +126,18 @@ body{
 <script>
 
 /*
-Best possible JS control (WebView friendly)
-This prevents new tab behavior inside normal browsers.
-NOT guaranteed against Android intent system.
+KEY FIX:
+We DO NOT force internal WebView navigation anymore.
+
+Instead, we allow Android system to handle it properly.
+This stops login loops.
 */
 
-document.addEventListener("click", function(e){
-
-    const a = e.target.closest("a");
-
-    if(a){
-
-        e.preventDefault();
-
-        window.location.href = a.href;
-
-    }
-
+document.querySelectorAll("a").forEach(a => {
+    a.addEventListener("click", function(){
+        // allow system to handle intent correctly
+        return true;
+    });
 });
 
 </script>
