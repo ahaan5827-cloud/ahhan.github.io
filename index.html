@@ -4,11 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NEON CORE HUB</title>
+<title>NEON SYSTEM HUB</title>
 
 <style>
-
-/* GLOBAL */
 
 *{
     margin:0;
@@ -19,19 +17,19 @@
 body{
 
     background:
-    radial-gradient(circle at top,#101820,#050505 60%);
+    radial-gradient(circle at top,#101820,#050505 70%);
 
     color:white;
 
     font-family:Arial, sans-serif;
 
-    overflow:hidden;
-
     width:100%;
     height:100vh;
+
+    overflow:hidden;
 }
 
-/* MAIN SCREEN */
+/* HOME SCREEN */
 
 #home{
 
@@ -55,9 +53,9 @@ body{
 
     font-weight:bold;
 
-    margin-bottom:50px;
+    letter-spacing:5px;
 
-    letter-spacing:6px;
+    margin-bottom:50px;
 
     color:#00f7ff;
 
@@ -72,18 +70,18 @@ body{
 
     display:grid;
 
-    grid-template-columns:repeat(2,150px);
+    grid-template-columns:repeat(2,160px);
 
     gap:25px;
 }
 
-/* APP CARDS */
+/* CARDS */
 
 .card{
 
-    height:150px;
+    height:160px;
 
-    border-radius:20px;
+    border-radius:22px;
 
     display:flex;
 
@@ -93,24 +91,22 @@ body{
 
     justify-content:center;
 
-    text-decoration:none;
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:bold;
+    cursor:pointer;
 
     transition:0.25s;
 
-    cursor:pointer;
+    font-weight:bold;
 
-    backdrop-filter:blur(10px);
+    font-size:18px;
+
+    text-align:center;
+
+    backdrop-filter:blur(12px);
 
     border:1px solid rgba(255,255,255,0.1);
 
     box-shadow:
-    0 0 20px rgba(255,255,255,0.08);
+    0 0 25px rgba(255,255,255,0.08);
 }
 
 /* HOVER */
@@ -123,7 +119,7 @@ body{
     0 0 25px rgba(255,255,255,0.25);
 }
 
-/* ICONS */
+/* ICON */
 
 .icon{
 
@@ -132,39 +128,37 @@ body{
     margin-bottom:15px;
 }
 
-/* CARD COLORS */
+/* SITE COLORS */
 
-.youtube{
-    background:linear-gradient(135deg,#ff0000,#700000);
+.xcard{
+
+    background:
+    linear-gradient(135deg,#111,#333);
 }
 
-.browser{
-    background:linear-gradient(135deg,#00c6ff,#0047ff);
+.ytcard{
+
+    background:
+    linear-gradient(135deg,#ff0000,#6e0000);
 }
 
-.music{
-    background:linear-gradient(135deg,#1db954,#003b12);
-}
-
-.ai{
-    background:linear-gradient(135deg,#9b59ff,#3d0070);
-}
-
-/* WEBVIEW */
+/* WEB VIEW */
 
 #viewer{
 
     position:fixed;
 
-    top:0;
+    top:60px;
     left:0;
 
     width:100%;
-    height:100%;
+    height:calc(100% - 60px);
 
     border:none;
 
     display:none;
+
+    background:#000;
 
     z-index:999;
 }
@@ -182,7 +176,7 @@ body{
 
     height:60px;
 
-    background:rgba(0,0,0,0.8);
+    background:rgba(0,0,0,0.85);
 
     backdrop-filter:blur(10px);
 
@@ -196,7 +190,8 @@ body{
 
     z-index:1000;
 
-    border-bottom:1px solid rgba(255,255,255,0.1);
+    border-bottom:
+    1px solid rgba(255,255,255,0.1);
 }
 
 /* BACK BUTTON */
@@ -219,6 +214,7 @@ body{
 }
 
 .back:hover{
+
     background:#222;
 }
 
@@ -233,6 +229,21 @@ body{
     letter-spacing:2px;
 }
 
+.note{
+
+    position:fixed;
+
+    bottom:12px;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:#888;
+}
+
 </style>
 </head>
 
@@ -243,65 +254,57 @@ body{
 <div id="home">
 
     <div class="title">
-        NEON CORE
+        NEON SYSTEM HUB
     </div>
 
     <div class="grid">
 
-        <div class="card youtube"
-            onclick="openSite('https://www.youtube.com/embed/jNQXAC9IVRw')">
+        <!-- X -->
+
+        <div class="card xcard"
+            onclick="openExternal('https://x.com')">
+
+            <div class="icon">𝕏</div>
+
+            X PLATFORM
+        </div>
+
+        <!-- YOUTUBE -->
+
+        <div class="card ytcard"
+            onclick="openExternal('https://youtube.com')">
 
             <div class="icon">▶</div>
 
-            YouTube
-        </div>
-
-        <div class="card browser"
-            onclick="openSite('https://example.com')">
-
-            <div class="icon">🌐</div>
-
-            Browser
-        </div>
-
-        <div class="card music"
-            onclick="openSite('https://open.spotify.com/embed/track/11dFghVXANMlKmJXsNCbNl')">
-
-            <div class="icon">♫</div>
-
-            Music
-        </div>
-
-        <div class="card ai"
-            onclick="openSite('https://example.com')">
-
-            <div class="icon">◎</div>
-
-            AI
+            YOUTUBE
         </div>
 
     </div>
 
 </div>
 
-<!-- TOPBAR -->
+<!-- TOP BAR -->
 
 <div id="topbar">
 
     <button class="back"
-        onclick="goBack()">
+        onclick="goHome()">
         ← BACK
     </button>
 
     <div class="label">
-        NEON SESSION
+        LIVE SESSION
     </div>
 
 </div>
 
-<!-- VIEWER -->
+<!-- IFRAME -->
 
 <iframe id="viewer"></iframe>
+
+<div class="note">
+    Some websites may still open externally due to browser security restrictions.
+</div>
 
 <script>
 
@@ -316,7 +319,11 @@ document.getElementById("topbar");
 
 /* OPEN */
 
-function openSite(url){
+function openExternal(url){
+
+    /*
+    ATTEMPT iframe first
+    */
 
     viewer.style.display="block";
 
@@ -325,11 +332,16 @@ function openSite(url){
     home.style.display="none";
 
     viewer.src=url;
+
+    /*
+    fallback:
+    some sites force external opening
+    */
 }
 
 /* BACK */
 
-function goBack(){
+function goHome(){
 
     viewer.src="";
 
