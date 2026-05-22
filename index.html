@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SYSTEM HUB</title>
+<title>NEON CORE HUB</title>
 
 <style>
+
+/* GLOBAL */
 
 *{
     margin:0;
@@ -15,104 +17,142 @@
 }
 
 body{
-    background:#050505;
-    color:#00ff00;
-    font-family:"Courier New", monospace;
+
+    background:
+    radial-gradient(circle at top,#101820,#050505 60%);
+
+    color:white;
+
+    font-family:Arial, sans-serif;
+
+    overflow:hidden;
 
     width:100%;
     height:100vh;
-
-    overflow:hidden;
 }
 
-/* HOME SCREEN */
+/* MAIN SCREEN */
 
-#homeScreen{
+#home{
+
     width:100%;
     height:100vh;
 
     display:flex;
+
     flex-direction:column;
 
     align-items:center;
+
     justify-content:center;
 }
 
-.header{
-    font-size:28px;
-    letter-spacing:4px;
+/* TITLE */
 
-    margin-bottom:45px;
+.title{
 
-    border-bottom:1px solid #00ff00;
+    font-size:34px;
 
-    padding-bottom:12px;
+    font-weight:bold;
 
-    text-shadow:0 0 10px #00ff00;
+    margin-bottom:50px;
+
+    letter-spacing:6px;
+
+    color:#00f7ff;
+
+    text-shadow:
+    0 0 10px #00f7ff,
+    0 0 25px #00f7ff;
 }
 
-.launch-btn{
+/* GRID */
 
-    width:260px;
+.grid{
 
-    padding:18px;
+    display:grid;
 
-    margin:15px;
+    grid-template-columns:repeat(2,150px);
 
-    background:#111;
+    gap:25px;
+}
 
-    color:#00ff00;
+/* APP CARDS */
 
-    border:2px solid #00ff00;
+.card{
+
+    height:150px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:white;
 
     font-size:18px;
 
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    border-radius:8px;
-
-    cursor:pointer;
+    font-weight:bold;
 
     transition:0.25s;
 
-    box-shadow:0 0 12px rgba(0,255,0,0.25);
+    cursor:pointer;
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:
+    0 0 20px rgba(255,255,255,0.08);
 }
 
-.launch-btn:hover{
-    transform:scale(1.03);
+/* HOVER */
 
-    box-shadow:0 0 18px rgba(0,255,0,0.5);
+.card:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 25px rgba(255,255,255,0.25);
 }
 
-.launch-btn:active{
-    background:#00ff00;
-    color:#000;
+/* ICONS */
+
+.icon{
+
+    font-size:42px;
+
+    margin-bottom:15px;
 }
 
-/* YOUTUBE BUTTON */
+/* CARD COLORS */
 
-.youtube-btn{
-    color:#ff3333;
-
-    border-color:#ff3333;
-
-    box-shadow:0 0 12px rgba(255,51,51,0.25);
+.youtube{
+    background:linear-gradient(135deg,#ff0000,#700000);
 }
 
-.youtube-btn:hover{
-    box-shadow:0 0 18px rgba(255,51,51,0.5);
+.browser{
+    background:linear-gradient(135deg,#00c6ff,#0047ff);
 }
 
-.youtube-btn:active{
-    background:#ff3333;
-    color:#000;
+.music{
+    background:linear-gradient(135deg,#1db954,#003b12);
 }
 
-/* APP VIEWER */
+.ai{
+    background:linear-gradient(135deg,#9b59ff,#3d0070);
+}
 
-#appFrame{
+/* WEBVIEW */
+
+#viewer{
 
     position:fixed;
 
@@ -126,14 +166,12 @@ body{
 
     display:none;
 
-    background:#000;
-
     z-index:999;
 }
 
 /* TOP BAR */
 
-#topBar{
+#topbar{
 
     position:fixed;
 
@@ -141,41 +179,58 @@ body{
     left:0;
 
     width:100%;
-    height:50px;
 
-    background:#000;
+    height:60px;
+
+    background:rgba(0,0,0,0.8);
+
+    backdrop-filter:blur(10px);
 
     display:none;
 
     align-items:center;
 
-    padding-left:10px;
+    justify-content:space-between;
+
+    padding:0 15px;
 
     z-index:1000;
 
-    border-bottom:1px solid #00ff00;
+    border-bottom:1px solid rgba(255,255,255,0.1);
 }
 
-.back-btn{
+/* BACK BUTTON */
+
+.back{
 
     background:#111;
 
-    color:#00ff00;
+    color:white;
 
-    border:1px solid #00ff00;
+    border:none;
 
-    padding:8px 16px;
+    padding:10px 18px;
+
+    border-radius:10px;
 
     cursor:pointer;
 
-    font-family:inherit;
-
-    border-radius:5px;
+    font-size:15px;
 }
 
-.back-btn:active{
-    background:#00ff00;
-    color:#000;
+.back:hover{
+    background:#222;
+}
+
+/* LABEL */
+
+.label{
+
+    color:#00f7ff;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
 }
 
 </style>
@@ -183,72 +238,106 @@ body{
 
 <body>
 
-<!-- HOME SCREEN -->
+<!-- HOME -->
 
-<div id="homeScreen">
+<div id="home">
 
-    <div class="header">
-        SYS // TERMINAL_HUB
+    <div class="title">
+        NEON CORE
     </div>
 
-    <button class="launch-btn"
-        onclick="openSite('https://example.com')">
-        Initialize Browser
-    </button>
+    <div class="grid">
 
-    <button class="launch-btn youtube-btn"
-        onclick="openSite('https://www.youtube.com/embed/dQw4w9WgXcQ')">
-        Initialize YouTube
-    </button>
+        <div class="card youtube"
+            onclick="openSite('https://www.youtube.com/embed/jNQXAC9IVRw')">
+
+            <div class="icon">▶</div>
+
+            YouTube
+        </div>
+
+        <div class="card browser"
+            onclick="openSite('https://example.com')">
+
+            <div class="icon">🌐</div>
+
+            Browser
+        </div>
+
+        <div class="card music"
+            onclick="openSite('https://open.spotify.com/embed/track/11dFghVXANMlKmJXsNCbNl')">
+
+            <div class="icon">♫</div>
+
+            Music
+        </div>
+
+        <div class="card ai"
+            onclick="openSite('https://example.com')">
+
+            <div class="icon">◎</div>
+
+            AI
+        </div>
+
+    </div>
 
 </div>
 
-<!-- TOP BAR -->
+<!-- TOPBAR -->
 
-<div id="topBar">
+<div id="topbar">
 
-    <button class="back-btn" onclick="goHome()">
-        BACK
+    <button class="back"
+        onclick="goBack()">
+        ← BACK
     </button>
+
+    <div class="label">
+        NEON SESSION
+    </div>
 
 </div>
 
-<!-- APP VIEWER -->
+<!-- VIEWER -->
 
-<iframe id="appFrame"></iframe>
+<iframe id="viewer"></iframe>
 
 <script>
 
-const frame = document.getElementById("appFrame");
+const viewer =
+document.getElementById("viewer");
 
-const home = document.getElementById("homeScreen");
+const home =
+document.getElementById("home");
 
-const topBar = document.getElementById("topBar");
+const topbar =
+document.getElementById("topbar");
 
-/* OPEN SITE */
+/* OPEN */
 
 function openSite(url){
 
-    frame.style.display = "block";
+    viewer.style.display="block";
 
-    topBar.style.display = "flex";
+    topbar.style.display="flex";
 
-    home.style.display = "none";
+    home.style.display="none";
 
-    frame.src = url;
+    viewer.src=url;
 }
 
-/* GO HOME */
+/* BACK */
 
-function goHome(){
+function goBack(){
 
-    frame.style.display = "none";
+    viewer.src="";
 
-    topBar.style.display = "none";
+    viewer.style.display="none";
 
-    home.style.display = "flex";
+    topbar.style.display="none";
 
-    frame.src = "";
+    home.style.display="flex";
 }
 
 </script>
