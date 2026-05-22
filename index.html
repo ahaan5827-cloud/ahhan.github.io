@@ -1,71 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYSTEM HUB</title>
-    <!-- Links to the manifest that makes it act native -->
-    <link rel="manifest" href="manifest.json">
-    <style>
-        body {
-            background-color: #050505;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-transform: uppercase;
-        }
-        .header {
-            font-size: 24px;
-            margin-bottom: 40px;
-            letter-spacing: 4px;
-            border-bottom: 1px solid #00ff00;
-            padding-bottom: 10px;
-        }
-        .launch-btn {
-            background-color: #111;
-            color: #00ff00;
-            border: 2px solid #00ff00;
-            padding: 15px 40px;
-            margin: 15px;
-            text-decoration: none;
-            font-size: 18px;
-            letter-spacing: 2px;
-            width: 250px;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-        }
-        .launch-btn:active {
-            background-color: #00ff00;
-            color: #000;
-        }
-        .youtube-btn {
-            color: #ff3333;
-            border-color: #ff3333;
-            box-shadow: 0 0 10px rgba(255, 51, 51, 0.2);
-        }
-        .youtube-btn:active {
-            background-color: #ff3333;
-            color: #000;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">SYS // TERMINAL_HUB</div>
-    
-    <!-- Using target="_blank" ensures the links open properly -->
-    <a href="intent://x.com/#Intent;scheme=https;package=com.twitter.android;S.browser_fallback_url=https%3A%2F%2Fx.com;end;" class="launch-btn">Initialize X</a>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<a href="intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;S.browser_fallback_url=https%3A%2F%2Fwww.youtube.com;end;" class="launch-btn youtube-btn">Initialize YouTube</a>
-        // Registers the service worker required for PWA installation
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
-    </script>
+<title>SYSTEM HUB</title>
+
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#050505">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:
+    radial-gradient(circle at top,#0f2027,#050505 70%);
+
+    color:#00ff99;
+
+    font-family:"Courier New", monospace;
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+/* BACKGROUND GLOW */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:
+    radial-gradient(circle,#00ff9950,transparent 70%);
+
+    filter:blur(60px);
+
+    z-index:0;
+}
+
+/* MAIN PANEL */
+
+.hub{
+
+    position:relative;
+
+    z-index:1;
+
+    width:340px;
+
+    padding:35px 25px;
+
+    border-radius:22px;
+
+    background:
+    rgba(0,0,0,0.55);
+
+    backdrop-filter:blur(12px);
+
+    border:
+    1px solid rgba(0,255,153,0.2);
+
+    box-shadow:
+    0 0 30px rgba(0,255,153,0.15);
+
+    text-align:center;
+}
+
+/* HEADER */
+
+.header{
+
+    font-size:28px;
+
+    letter-spacing:5px;
+
+    margin-bottom:10px;
+
+    color:#00ffcc;
+
+    text-shadow:
+    0 0 10px #00ffcc;
+}
+
+.sub{
+
+    color:#888;
+
+    font-size:12px;
+
+    margin-bottom:35px;
+
+    letter-spacing:2px;
+}
+
+/* BUTTONS */
+
+.launch-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    width:100%;
+
+    padding:18px;
+
+    margin:15px 0;
+
+    text-decoration:none;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    border-radius:14px;
+
+    transition:0.25s;
+
+    border:2px solid;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* BUTTON HOVER */
+
+.launch-btn:hover{
+
+    transform:translateY(-3px) scale(1.02);
+}
+
+/* BUTTON ACTIVE */
+
+.launch-btn:active{
+
+    transform:scale(0.97);
+}
+
+/* X BUTTON */
+
+.x-btn{
+
+    color:#ffffff;
+
+    border-color:#ffffff;
+
+    background:
+    linear-gradient(135deg,#111,#222);
+
+    box-shadow:
+    0 0 15px rgba(255,255,255,0.12);
+}
+
+.x-btn:hover{
+
+    box-shadow:
+    0 0 25px rgba(255,255,255,0.35);
+}
+
+/* YOUTUBE BUTTON */
+
+.youtube-btn{
+
+    color:#ff4b4b;
+
+    border-color:#ff4b4b;
+
+    background:
+    linear-gradient(135deg,#220000,#440000);
+
+    box-shadow:
+    0 0 15px rgba(255,75,75,0.15);
+}
+
+.youtube-btn:hover{
+
+    box-shadow:
+    0 0 25px rgba(255,75,75,0.35);
+}
+
+/* ICON */
+
+.icon{
+
+    font-size:22px;
+}
+
+/* FOOTER */
+
+.footer{
+
+    margin-top:25px;
+
+    font-size:11px;
+
+    color:#666;
+
+    letter-spacing:1px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hub">
+
+    <div class="header">
+        SYSTEM HUB
+    </div>
+
+    <div class="sub">
+        TERMINAL ACCESS PANEL
+    </div>
+
+    <!-- X -->
+
+    <a
+    href="intent://x.com/#Intent;scheme=https;package=com.twitter.android;S.browser_fallback_url=https%3A%2F%2Fx.com;end;"
+    class="launch-btn x-btn">
+
+        <span class="icon">𝕏</span>
+
+        INITIALIZE X
+    </a>
+
+    <!-- YOUTUBE -->
+
+    <a
+    href="intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;S.browser_fallback_url=https%3A%2F%2Fwww.youtube.com;end;"
+    class="launch-btn youtube-btn">
+
+        <span class="icon">▶</span>
+
+        INITIALIZE YOUTUBE
+    </a>
+
+    <div class="footer">
+        SECURE SESSION ACTIVE
+    </div>
+
+</div>
+
+<script>
+
+if ('serviceWorker' in navigator) {
+
+    navigator.serviceWorker.register('sw.js');
+}
+
+</script>
+
 </body>
 </html>
