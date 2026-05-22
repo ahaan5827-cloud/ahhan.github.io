@@ -6,7 +6,6 @@
 
 <title>SYSTEM HUB</title>
 
-<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#050505">
 
 <style>
@@ -19,86 +18,92 @@
 
 body{
     background: radial-gradient(circle at top,#0f2027,#050505 70%);
-    color:#00ff99;
+    color:#00ffcc;
     font-family:"Courier New", monospace;
 
     height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
+
     overflow:hidden;
 }
 
 /* PANEL */
 .hub{
     width:340px;
-    padding:35px 25px;
-    border-radius:22px;
+    padding:30px 25px;
+
+    border-radius:20px;
 
     background: rgba(0,0,0,0.6);
     backdrop-filter: blur(12px);
 
-    border: 1px solid rgba(0,255,153,0.2);
+    border:1px solid rgba(0,255,204,0.2);
 
     text-align:center;
 }
 
 /* TITLE */
-.header{
+.title{
     font-size:28px;
     letter-spacing:5px;
-    margin-bottom:10px;
+    margin-bottom:8px;
+
     color:#00ffcc;
     text-shadow:0 0 10px #00ffcc;
 }
 
 .sub{
-    font-size:12px;
+    font-size:11px;
     color:#888;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 /* BUTTONS */
-.launch-btn{
+.btn{
     display:block;
+
     padding:16px;
     margin:12px 0;
+
+    border-radius:12px;
 
     text-decoration:none;
     font-size:16px;
     font-weight:bold;
     letter-spacing:2px;
 
-    border-radius:12px;
-
     border:2px solid;
 
     transition:0.2s;
 
-    color:white;
+    user-select:none;
 }
 
 /* HOVER */
-.launch-btn:hover{
+.btn:hover{
     transform:scale(1.03);
 }
 
 /* X */
-.x-btn{
+.x{
     background:linear-gradient(135deg,#111,#222);
-    border-color:#fff;
+    border-color:#ffffff;
+    color:#ffffff;
 }
 
 /* YOUTUBE */
-.youtube-btn{
-    background:linear-gradient(135deg,#3a0000,#8b0000);
+.yt{
+    background:linear-gradient(135deg,#3a0000,#7a0000);
     border-color:#ff4b4b;
+    color:#ff4b4b;
 }
 
 /* FOOTER */
 .footer{
-    margin-top:20px;
-    font-size:11px;
+    margin-top:18px;
+    font-size:10px;
     color:#666;
 }
 
@@ -109,33 +114,42 @@ body{
 
 <div class="hub">
 
-    <div class="header">SYSTEM HUB</div>
-    <div class="sub">TERMINAL ACCESS PANEL</div>
+    <div class="title">SYSTEM HUB</div>
+    <div class="sub">ACCESS TERMINAL</div>
 
-    <!-- X -->
-    <a href="https://x.com" class="launch-btn x-btn">
-        INITIALIZE X
-    </a>
+    <!-- LINKS -->
+    <a class="btn x" href="https://x.com">INITIALIZE X</a>
 
-    <!-- YOUTUBE -->
-    <a href="https://www.youtube.com" class="launch-btn youtube-btn">
-        INITIALIZE YOUTUBE
-    </a>
+    <a class="btn yt" href="https://www.youtube.com">INITIALIZE YOUTUBE</a>
 
     <div class="footer">
-        SECURE SESSION ACTIVE
+        NOTE: Some apps may still open externally due to Android system rules
     </div>
 
 </div>
 
 <script>
-// Force same-window navigation inside WebView
-document.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", function(e){
+
+/*
+Best possible JS control (WebView friendly)
+This prevents new tab behavior inside normal browsers.
+NOT guaranteed against Android intent system.
+*/
+
+document.addEventListener("click", function(e){
+
+    const a = e.target.closest("a");
+
+    if(a){
+
         e.preventDefault();
-        window.location.href = this.href;
-    });
+
+        window.location.href = a.href;
+
+    }
+
 });
+
 </script>
 
 </body>
