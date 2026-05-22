@@ -7,7 +7,6 @@
 <title>SYSTEM HUB</title>
 
 <link rel="manifest" href="manifest.json">
-
 <meta name="theme-color" content="#050505">
 
 <style>
@@ -19,211 +18,88 @@
 }
 
 body{
-
-    background:
-    radial-gradient(circle at top,#0f2027,#050505 70%);
-
+    background: radial-gradient(circle at top,#0f2027,#050505 70%);
     color:#00ff99;
-
     font-family:"Courier New", monospace;
 
-    width:100%;
     height:100vh;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     overflow:hidden;
 }
 
-/* BACKGROUND GLOW */
-
-body::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:500px;
-    height:500px;
-
-    background:
-    radial-gradient(circle,#00ff9950,transparent 70%);
-
-    filter:blur(60px);
-
-    z-index:0;
-}
-
-/* MAIN PANEL */
-
+/* PANEL */
 .hub{
-
-    position:relative;
-
-    z-index:1;
-
     width:340px;
-
     padding:35px 25px;
-
     border-radius:22px;
 
-    background:
-    rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(12px);
 
-    backdrop-filter:blur(12px);
-
-    border:
-    1px solid rgba(0,255,153,0.2);
-
-    box-shadow:
-    0 0 30px rgba(0,255,153,0.15);
+    border: 1px solid rgba(0,255,153,0.2);
 
     text-align:center;
 }
 
-/* HEADER */
-
+/* TITLE */
 .header{
-
     font-size:28px;
-
     letter-spacing:5px;
-
     margin-bottom:10px;
-
     color:#00ffcc;
-
-    text-shadow:
-    0 0 10px #00ffcc;
+    text-shadow:0 0 10px #00ffcc;
 }
 
 .sub{
-
-    color:#888;
-
     font-size:12px;
-
-    margin-bottom:35px;
-
-    letter-spacing:2px;
+    color:#888;
+    margin-bottom:30px;
 }
 
 /* BUTTONS */
-
 .launch-btn{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:12px;
-
-    width:100%;
-
-    padding:18px;
-
-    margin:15px 0;
+    display:block;
+    padding:16px;
+    margin:12px 0;
 
     text-decoration:none;
-
-    font-size:17px;
-
+    font-size:16px;
     font-weight:bold;
-
     letter-spacing:2px;
 
-    border-radius:14px;
-
-    transition:0.25s;
+    border-radius:12px;
 
     border:2px solid;
 
-    position:relative;
+    transition:0.2s;
 
-    overflow:hidden;
+    color:white;
 }
 
-/* BUTTON HOVER */
-
+/* HOVER */
 .launch-btn:hover{
-
-    transform:translateY(-3px) scale(1.02);
+    transform:scale(1.03);
 }
 
-/* BUTTON ACTIVE */
-
-.launch-btn:active{
-
-    transform:scale(0.97);
-}
-
-/* X BUTTON */
-
+/* X */
 .x-btn{
-
-    color:#ffffff;
-
-    border-color:#ffffff;
-
-    background:
-    linear-gradient(135deg,#111,#222);
-
-    box-shadow:
-    0 0 15px rgba(255,255,255,0.12);
+    background:linear-gradient(135deg,#111,#222);
+    border-color:#fff;
 }
 
-.x-btn:hover{
-
-    box-shadow:
-    0 0 25px rgba(255,255,255,0.35);
-}
-
-/* YOUTUBE BUTTON */
-
+/* YOUTUBE */
 .youtube-btn{
-
-    color:#ff4b4b;
-
+    background:linear-gradient(135deg,#3a0000,#8b0000);
     border-color:#ff4b4b;
-
-    background:
-    linear-gradient(135deg,#220000,#440000);
-
-    box-shadow:
-    0 0 15px rgba(255,75,75,0.15);
-}
-
-.youtube-btn:hover{
-
-    box-shadow:
-    0 0 25px rgba(255,75,75,0.35);
-}
-
-/* ICON */
-
-.icon{
-
-    font-size:22px;
 }
 
 /* FOOTER */
-
 .footer{
-
-    margin-top:25px;
-
+    margin-top:20px;
     font-size:11px;
-
     color:#666;
-
-    letter-spacing:1px;
 }
 
 </style>
@@ -233,25 +109,19 @@ body::before{
 
 <div class="hub">
 
-    <div class="header">
-        SYSTEM HUB
-    </div>
-
-    <div class="sub">
-        TERMINAL ACCESS PANEL
-    </div>
+    <div class="header">SYSTEM HUB</div>
+    <div class="sub">TERMINAL ACCESS PANEL</div>
 
     <!-- X -->
-<a href="https://x.com" class="launch-btn x-btn">
-    <span class="icon">𝕏</span>
-    INITIALIZE X
-</a>
+    <a href="https://x.com" class="launch-btn x-btn">
+        INITIALIZE X
+    </a>
 
-<a href="https://www.youtube.com" class="launch-btn youtube-btn">
-    <span class="icon">▶</span>
-    INITIALIZE YOUTUBE
-</a>
-   
+    <!-- YOUTUBE -->
+    <a href="https://www.youtube.com" class="launch-btn youtube-btn">
+        INITIALIZE YOUTUBE
+    </a>
+
     <div class="footer">
         SECURE SESSION ACTIVE
     </div>
@@ -259,12 +129,13 @@ body::before{
 </div>
 
 <script>
-
-if ('serviceWorker' in navigator) {
-
-    navigator.serviceWorker.register('sw.js');
-}
-
+// Force same-window navigation inside WebView
+document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", function(e){
+        e.preventDefault();
+        window.location.href = this.href;
+    });
+});
 </script>
 
 </body>
