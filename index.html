@@ -58,9 +58,9 @@
     <div class="header">SYS // TERMINAL_HUB</div>
     
     <!-- Stripped Intent Links: No javascript, no fallbacks -->
-    <a href="intent://x.com/#Intent;scheme=https;package=com.twitter.android;end;" class="launch-btn">Initialize X</a>
-    <a href="intent://www.youtube.com/#Intent;scheme=https;package=com.google.android.youtube;end;" class="launch-btn youtube-btn">Initialize YouTube</a>
+   <a href="intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.twitter.android;end;" class="launch-btn">Initialize X</a>
 
+<a href="intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=com.google.android.youtube;end;" class="launch-btn youtube-btn">Initialize YouTube</a>
     <script>
         // Keep ONLY the Service Worker so it installs as an app
         if ('serviceWorker' in navigator) {
