@@ -1,1 +1,3 @@
-// Dummy Service Worker to satisfy PWA requirements
+// Basic Service Worker
+
+self.addEventListener('fetch', () => {});
